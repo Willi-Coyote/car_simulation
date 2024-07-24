@@ -21,8 +21,23 @@
   example is for a Windows Command prompt ```$env:PYTHONPATH="src;tests"```
 - Execute ```pytest```
 
+### Test results
+![Test results](docs/test_results.png)
+
 # Run the application
 
 - Make sure your virtual env is activated: ```venv\Scripts\activate```
 - Set the PYTHONPATH: ```$env:PYTHONPATH="src;tests"```
 - Run the main: ```python src/main.py```
+
+# Design
+
+- Although Python allows to have multiple classes within a file, I went the 'Java way' and mostly used 1 class per file.
+  This reduces problems with dependency cycles and makes the Open Closed principle a bit more explicit as you really add
+  new files and not change existing files (although you technically only add code).
+- The Car class is a composition with Movements. This follows the open closed and Single Responsibility design
+  principle. You can easily add new types of Movement like a MoveBackward with minimal modification of code.
+- The reader was extracted as the console is always tough to test. Although you can somehow mock it, it is a cleaner
+  way, also from a Single Responsibility point of view.
+- The SimulationResult is rather kept simple in order to not overengineer it. Depending on further requirements it can
+  be re-designed at a later stage where the new requirements are clear.
